@@ -1,6 +1,8 @@
+import { map } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
 
 import { ApiGoRestService } from "../../src/services/api-go-rest.service";
+import { ValueTransformer } from "@angular/compiler/src/util";
 
 @Component({
   selector: "app-root",
@@ -8,23 +10,43 @@ import { ApiGoRestService } from "../../src/services/api-go-rest.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
+  usersArray: [];
+
+  return: any
+
   title = "challenge-socialPost-front";
 
   constructor(private ApiGoRestService: ApiGoRestService) {}
 
   ngOnInit() {
-    this.getReturnUsers();
+    this.getReturnUsers(7676);
     this.getReturnPosts();
   }
 
-  getReturnUsers() {
-    return this.ApiGoRestService.getReturnUsers().subscribe((response) => {
-      console.log("Usuarios ", response);
+  getReturnUsers(id) {
+    var array = [];
+
+    this.ApiGoRestService.getReturnUsers(id).subscribe((response) => {
+      var objResult = response.result;
+      console.log(objResult)
+
+      // objResult.map((values) => {
+      //   // return values;
+
+      //   console.log('users', values)
+
+      // });
     });
   }
   getReturnPosts() {
-    return this.ApiGoRestService.getReturnPostsUsers().subscribe((response) => {
-      console.log("Posts", response);
+
+     this.ApiGoRestService.getReturnPostsUsers().subscribe((response) => {
+      var objResult = response.result;
+
+      objResult.map((values) => {
+      console.log('posts', values)
+
     });
+  })
   }
 }

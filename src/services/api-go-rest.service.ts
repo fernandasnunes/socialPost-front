@@ -21,16 +21,18 @@ export class ApiGoRestService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + this.auth_token
+      'Authorization': 'Bearer ' + this.auth_token,
+      'Access-Control-Allow-Origin': '*'
     })
   };
 
-  getReturnUsers() {
-    return this.http.get<any>(this.urlUsers, this.httpOptions)
+  getReturnUsers(id) {
+    return this.http.get<any>(this.urlUsers + '/'+ id, this.httpOptions)
       .pipe(
         map(response => {
-          // console.log('response apiGoRest', response)
-          return response
+
+           return response
+
         })
       )
   }
