@@ -26,8 +26,8 @@ export class ApiGoRestService {
     })
   };
 
-  getReturnUsers(id) {
-    return this.http.get<any>(this.urlUsers + '/'+ id, this.httpOptions)
+  getReturnUsers() {
+    return this.http.get<any>(this.urlUsers, this.httpOptions)
       .pipe(
         map(response => {
 
@@ -36,6 +36,17 @@ export class ApiGoRestService {
         })
       )
   }
+
+  // getReturnUsers(id) {
+  //   return this.http.get<any>(this.urlUsers + '/'+ id, this.httpOptions)
+  //     .pipe(
+  //       map(response => {
+
+  //          return response
+
+  //       })
+  //     )
+  // }
 
   getReturnPostsUsers() {
     return this.http.get<any>(this.urlPosts, this.httpOptions)

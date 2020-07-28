@@ -10,43 +10,49 @@ import { ValueTransformer } from "@angular/compiler/src/util";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  usersArray: [];
+  title = "SocialPost";
 
-  return: any
+  users: Array<any>;
+  images: Array<any>;
+array: []
 
-  title = "challenge-socialPost-front";
+  post: Array<any>;
+
+  // title = "challenge-socialPost-front";
 
   constructor(private ApiGoRestService: ApiGoRestService) {}
 
   ngOnInit() {
-    this.getReturnUsers(7676);
-    this.getReturnPosts();
+    this.getReturnUsers();
+    // this.getReturnPosts();
   }
 
-  getReturnUsers(id) {
+  getReturnUsers() {
     var array = [];
 
-    this.ApiGoRestService.getReturnUsers(id).subscribe((response) => {
-      var objResult = response.result;
-      console.log(objResult)
+    this.ApiGoRestService.getReturnUsers().subscribe((response) => {
+      this.users = response.result;
+      console.log("users", this.users);
 
-      // objResult.map((values) => {
-      //   // return values;
+      this.users.map((imagens) => {
 
-      //   console.log('users', values)
+        this.images = Object.values(imagens._links.avatar.href)
+      console.log(this.images )
 
-      // });
+
+
+      });
     });
   }
-  getReturnPosts() {
+  // getReturnPosts() {
 
-     this.ApiGoRestService.getReturnPostsUsers().subscribe((response) => {
-      var objResult = response.result;
+  //    this.ApiGoRestService.getReturnPostsUsers().subscribe((response) => {
+  //     var objResult = response.result;
 
-      objResult.map((values) => {
-      console.log('posts', values)
+  //     objResult.map((values) => {
+  //     console.log('posts', values)
 
-    });
-  })
-  }
+  //   });
+  // })
+  // }
 }
